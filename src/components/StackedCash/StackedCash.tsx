@@ -15,17 +15,14 @@ const StackedCash: React.FC<StackedCashProps> = ({ desc, value, piece }) => {
         eachPieces.push(i);
     }
 
-    let cashOrCoinClass = (value >= 1000) ? "cash" : "coin";
-    let restPiecesClass = (value >= 1000) ? "rest-cash" : "rest-coin";
-
     return (
         <>
         <div className="cash-container">
         {eachPieces.map((p) => {
-            let orderClass = (p === 0) ? "first-piece" : restPiecesClass;
+            let stackClasses = (p === 0) ? `first-piece cash ${desc}` : `cash ${desc}`;
             return (
-                <div 
-                className={`${cashOrCoinClass} ${desc} ${orderClass}`}
+                <div
+                className={stackClasses}
                 key={`${desc}-${p}`}>
                 </div>
             );

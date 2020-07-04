@@ -6,55 +6,67 @@
 }
 
 .first-piece {
-    margin-left: 0;
-}
-.rest-cash {
-    margin-left: -5rem;
-}
-.rest-coin {
-    margin-left: -7.5rem;
+    margin-left: 0 !important;
 }
 
 .cash {
-    height: 75px;
-    width: 150px;
-    background-repeat: no-repeat;
-    background-size: contain; 
-}
-
-.coin {
-    height: 75px;
-    width: 75px;
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 .tenK {
     background-image: url(../../img/10000yen.png);
+    height: 85px;
+    width: 160px; 
+    margin-left: -6rem;
 }
 .fiveK {
     background-image: url(../../img/5000yen.png);
+    height: 80px;
+    width: 155px; 
+    margin-left: -5.5rem;
 }   
 .oneK {
     background-image: url(../../img/1000yen.png);
+    height: 75px;
+    width: 150px;
+    margin-left: -5rem;
 }
 .fiveH {
     background-image: url(../../img/500yen.png);
+    height: 75px;
+    width: 75px;
+    margin-left: -8rem;
 }
 .oneH {
     background-image: url(../../img/100yen.png);
+    height: 70px;
+    width: 70px;
+    margin-left: -7.5rem;
 }
 .fifty {
     background-image: url(../../img/50yen.png);
+    height: 65px;
+    width: 65px;
+    margin-left: -7rem;
 }
 .ten {
     background-image: url(../../img/10yen.png);
+    height: 60px;
+    width: 60px;
+    margin-left: -6.5rem;
 }
 .five {
     background-image: url(../../img/5yen.png);
+    height: 55px;
+    width: 55px;
+    margin-left: -6rem;
 }
 .one {
     background-image: url(../../img/1yen.png);
+    height: 50px;
+    width: 50px;
+    margin-left: -5.5rem;
 }
 
 
