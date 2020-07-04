@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // Import Components
 import { convertToCash , formatYen, formatPiece} from './convertToCash';
 import { StackedCash } from '../StackedCash';
-import { InputNumber, Card, Statistic, Row, Col, Button } from 'antd';
+import { InputNumber, Card, Statistic, Row, Col, Button, Modal } from 'antd';
 // Import Types, Interfaces
 import { Cash } from '../types';
 // Import CSS
@@ -13,6 +13,7 @@ import './AppContent.css';
 const AppContent: React.FC = () => {
     const [amount, setAmount] = useState<number>(0);
     const [cash, setCash] = useState<Cash>([]);
+    const [showSettings, setShowSettings] = useState<boolean>(false);
 
     useEffect( () => {
         let currentCash = convertToCash(amount);
@@ -58,6 +59,22 @@ const AppContent: React.FC = () => {
                     );
                 })
             }
+            <Row justify="center">
+                <Button type="primary" onClick={() => setShowSettings(true)}>
+                    Vertically centered modal dialog
+                </Button>
+                <Modal
+                title="Vertically centered modal dialog"
+                centered
+                visible={showSettings}
+                onOk={() => setShowSettings(false)}
+                onCancel={() => setShowSettings(false)}
+                >
+                    <p>some contents...</p>
+                    <p>some contents...</p>
+                    <p>some contents...</p>
+                </Modal>
+            </Row>
         </>
     );
 }
