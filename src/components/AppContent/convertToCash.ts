@@ -1,5 +1,21 @@
 import { Cash } from '../types';
 
+type cashDescType = {
+    [index: number]: string;
+}
+
+const cashDesc: cashDescType = {
+    10000: "tenK",
+    5000: "fiveK",
+    1000: "oneK",
+    500: "fiveH",
+    100: "oneH",
+    50: "fifty",
+    10: "ten",
+    5: "five",
+    1: "one"
+};
+
 export function convertToCash(amount: number): Cash {
     let availableCash: Cash = [];
     
@@ -13,7 +29,7 @@ export function convertToCash(amount: number): Cash {
         
         if (currentPieces > 0) {
             availableCash.push({
-                desc: `¥ ${currentValue}`,
+                desc: cashDesc[currentValue],
                 value: currentValue,
                 piece: currentPieces
             });

@@ -22,7 +22,7 @@ const StackedCash: React.FC<StackedCashProps> = ({ desc, value, piece }) => {
             let orderClass = (p === 0) ? "first-piece" : "rest-pieces";
             return (
                 <div 
-                className={`tenK ${orderClass}`}
+                className={`cash ${desc} ${orderClass}`}
                 key={`${desc}-${p}`}>
                 </div>
             );
