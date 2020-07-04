@@ -42,33 +42,22 @@ const AppContent: React.FC = () => {
                     <Card>
                         <Statistic title="残高" value={amount} formatter={ val => formatYen(val as number) } />
                     </Card>
-                    <Card title="現金">
-                    {cash.map((cashType) => {
-                        return (
-                            <Statistic
-                            key={cashType.desc} 
-                            title={cashType.desc} 
-                            value={cashType.piece} 
-                            formatter={ val => formatPiece(val as number) } />
-                        );                        
-                    })}
-                    </Card>
-                    
-                    <Button style={{ marginTop: 16 }} type="primary">
-                        Recharge
-                    </Button>
                 </Col>
             </Row>
-            <Row gutter={16} style={{ margin: 16 }} justify="center">
-                <Col span={24}>
-                    {cash.length > 0 &&
-                        <StackedCash
-                            desc={cash[0].desc}
-                            value={cash[0].value}
-                            piece={cash[0].piece}
-                    />}
-                </Col>
-            </Row>
+            {cash.length > 0 &&
+                cash.map((cashType) => {
+                    return (
+                        <Row justify="center">
+                            <Col span={24}>
+                                <StackedCash 
+                                desc={cashType.desc}
+                                value={cashType.value}
+                                piece={cashType.piece}/>
+                            </Col>
+                        </Row>
+                    );
+                })
+            }
         </>
     );
 }
