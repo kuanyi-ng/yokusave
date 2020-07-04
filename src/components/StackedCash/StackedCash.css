@@ -1,0 +1,20 @@
+.cash-container {
+    display: flex;
+    justify-content: center;
+}
+
+.first-piece {
+    margin-left: 0;
+}
+
+.rest-pieces {
+    margin-left: -10rem;
+}
+
+.tenK {
+    height: 10vh;
+    width: 50vw;
+    background-image: url(../../img/10000.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}

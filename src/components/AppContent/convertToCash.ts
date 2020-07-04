@@ -1,10 +1,4 @@
-interface minCash {
-    desc: string;
-    value: number;
-    piece: number;
-};
-
-export type Cash = minCash[];
+import { Cash } from '../types';
 
 export function convertToCash(amount: number): Cash {
     let availableCash: Cash = [];
