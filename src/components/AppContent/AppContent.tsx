@@ -60,20 +60,52 @@ const AppContent: React.FC = () => {
                 })
             }
             <Row justify="center">
-                <Button type="primary" onClick={() => setShowSettings(true)}>
-                    Vertically centered modal dialog
-                </Button>
-                <Modal
-                title="Vertically centered modal dialog"
-                centered
-                visible={showSettings}
-                onOk={() => setShowSettings(false)}
-                onCancel={() => setShowSettings(false)}
-                >
-                    <p>some contents...</p>
-                    <p>some contents...</p>
-                    <p>some contents...</p>
-                </Modal>
+                <Col span={24}>
+                    <Button type="primary" onClick={() => setShowSettings(true)}>
+                        予算設定
+                    </Button>
+                    <Modal
+                    title="予算設定"
+                    centered
+                    visible={showSettings}
+                    onOk={() => setShowSettings(false)}
+                    onCancel={() => setShowSettings(false)}
+                    >
+                        <Row style={{ margin: 16, alignItems: 'baseline' }}>　{/* 月の予算 */}
+                            <Col span={4} style={{ textAlign: 'right', marginRight: 16 }}>1ヶ月</Col>
+                            <Col span={15}>
+                                <InputNumber
+                                defaultValue={0}
+                                formatter={value => `¥ ${value} /月`}
+                                onChange={(value) => console.log(value)}
+                                size="large"
+                                style={{ width: 250 }} />
+                            </Col>                            
+                        </Row>
+                        <Row style={{ margin: 16, alignItems: 'baseline' }}>　{/* 週の予算 */}
+                            <Col span={4} style={{ textAlign: 'right', marginRight: 16 }}>1週間</Col>
+                            <Col span={15}>
+                                <InputNumber
+                                defaultValue={0}
+                                formatter={value => `¥ ${value} /週`}
+                                onChange={(value) => console.log(value)}
+                                size="large"
+                                style={{ width: 250 }} />
+                            </Col>
+                        </Row>
+                        <Row style={{ margin: 16, alignItems: 'baseline' }}> {/* 日の予算 */}
+                            <Col span={5} style={{ textAlign: 'right', marginRight: 16 }}>1日</Col>
+                            <Col span={15}>
+                                <InputNumber
+                                defaultValue={0}
+                                formatter={value => `¥ ${value} /日`}
+                                onChange={(value) => console.log(value)}
+                                size="large"
+                                style={{ width: 250 }} />
+                            </Col>
+                        </Row>
+                    </Modal>
+                </Col>
             </Row>
         </>
     );
