@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { convertToCash , formatYen } from './convertToCash';
 import { StackedCash } from '../StackedCash';
 import { BudgetForm } from '../BudgetForm';
+import { PayForm } from '../PayForm';
 import { Card, Statistic, Row, Col } from 'antd';
 // Import Types, Interfaces
 import { Cash, Budget, RemainingAmount } from '../types';
@@ -57,9 +58,12 @@ const AppContent: React.FC = () => {
                     );
                 })
             }
-            <BudgetForm 
-            handleFinish={ updateBudget }
-            />
+            <div className="menu-bar">
+                <BudgetForm 
+                handleFinish={ updateBudget }
+                />
+                <PayForm />
+            </div>
         </>
     );
 }
