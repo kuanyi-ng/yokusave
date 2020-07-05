@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // Import Components
 import { convertToCash , formatYen, formatPiece} from './convertToCash';
 import { StackedCash } from '../StackedCash';
-import { InputNumber, Card, Statistic, Row, Col, Button, Modal } from 'antd';
+import { Input, InputNumber, Card, Statistic, Row, Col, Button, Modal, Form } from 'antd';
 // Import Types, Interfaces
 import { Cash } from '../types';
 // Import CSS
@@ -64,49 +64,63 @@ const AppContent: React.FC = () => {
                     <Button type="primary" onClick={() => setShowSettings(true)}>
                         予算設定
                     </Button>
-                    <Modal
-                    title="予算設定"
-                    centered
-                    visible={showSettings}
-                    onOk={() => setShowSettings(false)}
-                    onCancel={() => setShowSettings(false)}
-                    >
-                        <Row style={{ margin: 16, alignItems: 'baseline' }}>　{/* 月の予算 */}
-                            <Col span={4} style={{ textAlign: 'right', marginRight: 16 }}>1ヶ月</Col>
-                            <Col span={15}>
-                                <InputNumber
-                                defaultValue={0}
-                                formatter={value => `¥ ${value} /月`}
-                                onChange={(value) => console.log(value)}
-                                size="large"
-                                style={{ width: 250 }} />
-                            </Col>                            
-                        </Row>
-                        <Row style={{ margin: 16, alignItems: 'baseline' }}>　{/* 週の予算 */}
-                            <Col span={4} style={{ textAlign: 'right', marginRight: 16 }}>1週間</Col>
-                            <Col span={15}>
-                                <InputNumber
-                                defaultValue={0}
-                                formatter={value => `¥ ${value} /週`}
-                                onChange={(value) => console.log(value)}
-                                size="large"
-                                style={{ width: 250 }} />
-                            </Col>
-                        </Row>
-                        <Row style={{ margin: 16, alignItems: 'baseline' }}> {/* 日の予算 */}
-                            <Col span={5} style={{ textAlign: 'right', marginRight: 16 }}>1日</Col>
-                            <Col span={15}>
-                                <InputNumber
-                                defaultValue={0}
-                                formatter={value => `¥ ${value} /日`}
-                                onChange={(value) => console.log(value)}
-                                size="large"
-                                style={{ width: 250 }} />
-                            </Col>
-                        </Row>
-                    </Modal>
                 </Col>
             </Row>
+            <Modal
+            title="予算設定"
+            centered={true}
+            visible={showSettings}
+            footer={null}
+            onCancel={() => setShowSettings(false)}
+            >
+                <Form
+                layout="vertical"
+                labelCol={{ span: 4 }}
+                wrapperCol={{ span: 20 }}
+                name="budget"
+                size="large"
+                hideRequiredMark={true}
+                initialValues={{ monthlyBudget: 0, weeklyBudget: 0, dailyBudget: 0 }}
+                onFinish={(val) => {
+                    console.log(val);
+                    setShowSettings(false);
+                }}
+                onFinishFailed={(val => {
+                    console.log(val);
+                    setShowSettings(false);
+                })}
+                >
+                <Form.Item
+                    label="1ヶ月"
+                    name="monthlyBudget"
+                    rules={[{ required: true, message: '今月の予算を入力してください' }]}
+                >
+                    <InputNumber defaultValue={0} formatter={value => `¥ ${value} /月`} style={{ width: 300 }}/>
+                </Form.Item>
+
+                <Form.Item
+                    label="1週間"
+                    name="weeklyBudget"
+                    rules={[{ required: false }]}
+                >
+                    <InputNumber defaultValue={0} formatter={value => `¥ ${value} /週`} style={{ width: 300 }}/> 
+                </Form.Item>
+
+                <Form.Item
+                    label="1日"
+                    name="dailyBudget"
+                    rules={[{ required: false }]}
+                >
+                    <InputNumber defaultValue={0} formatter={value => `¥ ${value} /日`} style={{ width: 300 }}/>
+                </Form.Item>
+
+                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Button type="primary" htmlType="submit">
+                    Submit
+                    </Button>
+                </Form.Item>
+                </Form>
+            </Modal>
         </>
     );
 }
