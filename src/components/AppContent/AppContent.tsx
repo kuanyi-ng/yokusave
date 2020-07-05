@@ -34,6 +34,14 @@ const AppContent: React.FC = () => {
         })
     }
 
+    const updateRemainingAmount = (payAmount: number) => {
+        setRemainingAmount({
+            monthlyRemaining: remainingAmount.monthlyRemaining - payAmount,
+            weeklyRemaining: remainingAmount.weeklyRemaining - payAmount,
+            dailyRemaining: remainingAmount.dailyRemaining - payAmount
+        })
+    }
+
     return (
         <>
             <h1>欲セーブ</h1>
@@ -62,7 +70,8 @@ const AppContent: React.FC = () => {
                 <BudgetForm 
                 handleFinish={ updateBudget }
                 />
-                <PayForm />
+                <PayForm 
+                handleFinish={ updateRemainingAmount }/>
             </div>
         </>
     );

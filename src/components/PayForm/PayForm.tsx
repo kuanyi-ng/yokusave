@@ -3,7 +3,11 @@ import { Row, Col, Button, Modal, Form, InputNumber } from 'antd';
 // Import CSS
 import 'antd/dist/antd.css';
 
-const PayForm: React.FC = () => {
+interface PayFormProps {
+    handleFinish: (payAmount: number) => void
+}
+
+const PayForm: React.FC<PayFormProps> = ({ handleFinish }) => {
     const [showPay, setShowPay] = useState<boolean>(false);
     
     const payAmountInputProps = {
@@ -41,8 +45,7 @@ const PayForm: React.FC = () => {
                 hideRequiredMark={true}
                 initialValues={{ monthlyBudget: 0, weeklyBudget: 0, dailyBudget: 0 }}
                 onFinish={(value) => {
-                    // handleFinish(budget as Budget);
-                    console.log(value);
+                    handleFinish(value.payAmount);
                     setShowPay(false);
                 }}
                 onFinishFailed={(val) => {
