@@ -4,7 +4,7 @@ import { convertToCash , formatYen } from './convertToCash';
 import { StackedCash } from '../StackedCash';
 import { BudgetForm } from '../BudgetForm';
 import { PayForm } from '../PayForm';
-import { Card, Statistic, Row, Col } from 'antd';
+import { Card, Statistic, Row, Col, Tabs } from 'antd';
 // Import Types, Interfaces
 import { Cash, Budget, RemainingAmount } from '../types';
 // Import CSS
@@ -42,6 +42,8 @@ const AppContent: React.FC = () => {
         })
     }
 
+    const { TabPane } = Tabs;
+
     return (
         <>
             <h1>欲セーブ</h1>
@@ -66,6 +68,28 @@ const AppContent: React.FC = () => {
                     );
                 })
             }
+            <Tabs defaultActiveKey="daily" centered>
+                <Tabs.TabPane tab="月" key="monthly">
+                {cash.length > 0 &&
+                    cash.map((cashType) => {
+                        return (
+                            <Row justify="center">
+                                <Col span={24}>
+                                    <StackedCash 
+                                    desc={cashType.desc}
+                                    value={cashType.value}
+                                    piece={cashType.piece}/>
+                                </Col>
+                            </Row>
+                        );
+                    })
+                }
+                </Tabs.TabPane>
+                <TabPane tab="日" key="daily">
+                </TabPane>
+                <TabPane tab="週" key="weekly">
+                </TabPane>
+            </Tabs>
             <div className="menu-bar">
                 <BudgetForm 
                 handleFinish={ updateBudget }
