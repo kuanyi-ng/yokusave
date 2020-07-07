@@ -43,13 +43,13 @@ const PayForm: React.FC<PayFormProps> = ({ handleFinish }) => {
                 name="pay"
                 size="large"
                 hideRequiredMark={true}
-                initialValues={{ monthlyBudget: 0, weeklyBudget: 0, dailyBudget: 0 }}
+                initialValues={{ payAmount: 0 }}
                 onFinish={(value) => {
                     handleFinish(value.payAmount);
                     setShowPay(false);
                 }}
-                onFinishFailed={(val) => {
-                    console.log("Cancelled", val);
+                onFinishFailed={(value) => {
+                    console.log("Cancelled", value);
                     setShowPay(false);
                 }}
                 >
