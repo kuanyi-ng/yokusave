@@ -6,10 +6,11 @@ import { BudgetForm } from '../BudgetForm';
 import { PayForm } from '../PayForm';
 import { Card, Statistic, Row, Col, Tabs } from 'antd';
 // Import Types, Interfaces
-import { Cash, Budget, RemainingAmount } from '../types';
+import { Cash, Budget, RemainingAmount, CashStack } from '../types';
 // Import CSS
 import 'antd/dist/antd.css';
 import './AppContent.css';
+import { RemainingCash } from '../RemainingCash';
 
 const AppContent: React.FC = () => {
     const [budget, setBudget] = useState<Budget>({ monthlyBudget: 0, weeklyBudget: 0, dailyBudget: 0 });
@@ -47,8 +48,6 @@ const AppContent: React.FC = () => {
         })
     }
 
-    const { TabPane } = Tabs;
-
     return (
         <>
             <h1>欲セーブ</h1>
@@ -59,23 +58,25 @@ const AppContent: React.FC = () => {
                     </Card>
                 </Col>
             </Row>
-            {cash.monthlyCash.length > 0 &&
-                cash.monthlyCash.map((cashType) => {
-                    return (
-                        <Row justify="center">
-                            <Col span={24}>
-                                <StackedCash 
-                                desc={cashType.desc}
-                                value={cashType.value}
-                                piece={cashType.piece}/>
-                            </Col>
-                        </Row>
-                    );
-                })
-            }
-            <Tabs defaultActiveKey="daily" centered>
+            <Tabs defaultActiveKey="daily" centered tabPosition="bottom">
                 <Tabs.TabPane tab="月" key="monthly">
-                {cash.dailyCash.length > 0 &&
+                   {cash.monthlyCash.length > 0 &&
+                    cash.monthlyCash.map((cashType) => {
+                        return (
+                            <Row justify="center">
+                                <Col span={24}>
+                                    <StackedCash 
+                                    desc={cashType.desc}
+                                    value={cashType.value}
+                                    piece={cashType.piece}/>
+                                </Col>
+                            </Row>
+                        );
+                    })
+                } 
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="日" key="daily">
+                   {cash.dailyCash.length > 0 &&
                     cash.dailyCash.map((cashType) => {
                         return (
                             <Row justify="center">
@@ -88,12 +89,24 @@ const AppContent: React.FC = () => {
                             </Row>
                         );
                     })
-                }
+                } 
                 </Tabs.TabPane>
-                <TabPane tab="日" key="daily">
-                </TabPane>
-                <TabPane tab="週" key="weekly">
-                </TabPane>
+                <Tabs.TabPane tab="週" key="weekly">
+                   {cash.weeklyCash.length > 0 &&
+                    cash.weeklyCash.map((cashType) => {
+                        return (
+                            <Row justify="center">
+                                <Col span={24}>
+                                    <StackedCash 
+                                    desc={cashType.desc}
+                                    value={cashType.value}
+                                    piece={cashType.piece}/>
+                                </Col>
+                            </Row>
+                        );
+                    })
+                } 
+                </Tabs.TabPane>
             </Tabs>
             <div className="menu-bar">
                 <BudgetForm 
