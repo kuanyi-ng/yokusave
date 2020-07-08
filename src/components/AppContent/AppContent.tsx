@@ -14,12 +14,17 @@ import './AppContent.css';
 const AppContent: React.FC = () => {
     const [budget, setBudget] = useState<Budget>({ monthlyBudget: 0, weeklyBudget: 0, dailyBudget: 0 });
     const [remainingAmount, setRemainingAmount] = useState<RemainingAmount>({ monthlyRemaining: 0, weeklyRemaining: 0 , dailyRemaining: 0});
-    const [cash, setCash] = useState<Cash>([]);
+    const [cash, setCash] = useState<Cash>({ monthlyCash: [], weeklyCash: [], dailyCash: [] });
 
     useEffect( () => {
-        let currentCash = convertToCash(remainingAmount.monthlyRemaining);
-        setCash(currentCash);
-        console.log(currentCash);
+        let remainingCash: Cash = {
+            monthlyCash: convertToCash(remainingAmount.monthlyRemaining),
+            weeklyCash: convertToCash(remainingAmount.weeklyRemaining),
+            dailyCash: convertToCash(remainingAmount.dailyRemaining)
+        }
+        setCash(remainingCash);
+        
+        console.log(remainingCash);
         console.log(budget);
         console.log(remainingAmount);
     }, [budget, remainingAmount]);
@@ -54,8 +59,8 @@ const AppContent: React.FC = () => {
                     </Card>
                 </Col>
             </Row>
-            {cash.length > 0 &&
-                cash.map((cashType) => {
+            {cash.monthlyCash.length > 0 &&
+                cash.monthlyCash.map((cashType) => {
                     return (
                         <Row justify="center">
                             <Col span={24}>
@@ -70,8 +75,8 @@ const AppContent: React.FC = () => {
             }
             <Tabs defaultActiveKey="daily" centered>
                 <Tabs.TabPane tab="月" key="monthly">
-                {cash.length > 0 &&
-                    cash.map((cashType) => {
+                {cash.dailyCash.length > 0 &&
+                    cash.dailyCash.map((cashType) => {
                         return (
                             <Row justify="center">
                                 <Col span={24}>

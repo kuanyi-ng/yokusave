@@ -1,4 +1,4 @@
-import { Cash } from '../types';
+import { CashStack } from '../types';
 
 type cashDescType = {
     [index: number]: string;
@@ -16,8 +16,8 @@ const cashDesc: cashDescType = {
     1: "one"
 };
 
-export function convertToCash(amount: number): Cash {
-    let availableCash: Cash = [];
+export function convertToCash(amount: number): CashStack {
+    let availableCash: CashStack = [];
     
     let remainingAmount = amount;
 

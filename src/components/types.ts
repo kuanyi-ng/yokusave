@@ -1,10 +1,16 @@
-export interface MinCash {
+export interface PiecesOfCash {
     desc: string;
     value: number;
     piece: number;
 };
 
-export type Cash = MinCash[];
+export type CashStack = PiecesOfCash[];
+
+export interface Cash {
+    monthlyCash: CashStack;
+    weeklyCash: CashStack;
+    dailyCash: CashStack;
+}
 
 export interface Budget {
     monthlyBudget: number;
