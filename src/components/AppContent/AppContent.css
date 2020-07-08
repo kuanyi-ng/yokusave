@@ -1,3 +1,10 @@
+.app-title {
+    margin: 0;
+    padding: 1rem;
+    background-color: #1de9b6;
+    color: #fafafa;
+}
+
 .ant-tabs-tab {
     margin: 0 2rem;
 }

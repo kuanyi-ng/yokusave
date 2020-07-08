@@ -49,7 +49,7 @@ const AppContent: React.FC = () => {
 
     return (
         <>
-            <h1>欲セーブ</h1>
+            <h1 className="app-title">欲セーブ</h1>
             <Row gutter={16} style={{ margin: 16 }}>
                 <Col span={24}>
                     <Tabs 
