@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackedCash } from '../StackedCash';
-import { Row, Col, Statistic } from 'antd';
+import { Statistic } from 'antd';
 // Import Types, Interface
 import { CashStack } from '../types';
 // Import CSS
@@ -18,22 +18,7 @@ const RemainingCash: React.FC<RemainingCashProps> = ({ statsTitle, remaining, or
     return (
         <>
         <Statistic title={`${statsTitle}の残高`} value={remaining} prefix="¥ " suffix={`/ ${original}`} />
-        {cashStack.length > 0 &&
-            cashStack.map((eachCash, index) => {
-                return (
-                    <>
-                        <Row justify="center" key={`${tabName}-${index}`}>
-                            <Col span={24}>
-                                <StackedCash 
-                                desc={eachCash.desc}
-                                value={eachCash.value}
-                                piece={eachCash.piece}/>
-                            </Col>
-                        </Row>
-                    </>
-                );
-            })  
-        }
+        <StackedCash stack={cashStack} />
         </>
     );
 }
