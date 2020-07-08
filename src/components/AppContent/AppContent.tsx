@@ -50,7 +50,7 @@ const AppContent: React.FC = () => {
     return (
         <>
             <h1 className="app-title">欲セーブ</h1>
-            <Row gutter={16} style={{ margin: 16 }}>
+            <Row gutter={16} style={{ marginLeft: 16, marginRight: 16 }}>
                 <Col span={24}>
                     <Tabs 
                     defaultActiveKey="daily" 
@@ -89,13 +89,13 @@ const AppContent: React.FC = () => {
                     </Tabs>
                 </Col>
             </Row>
-            <div className="menu-bar">
+            <Row className="menu-bar">
                 <BudgetForm 
                 handleFinish={ updateBudget }
                 />
                 <PayForm 
                 handleFinish={ updateRemainingAmount }/>
-            </div>
+            </Row>
         </>
     );
 }

@@ -3,6 +3,7 @@
     flex-flow: row wrap;
     justify-content: center;
     align-content: flex-start;
+    align-items: center;
 }
 
 .first-piece {
@@ -34,39 +35,39 @@
 }
 .fiveH {
     background-image: url(../../img/500yen.png);
-    height: 75px;
-    width: 75px;
-    margin-left: -8rem;
+    height: 3.5rem;
+    width: 3.5rem;
+    margin-left: -1.75rem;
 }
 .oneH {
     background-image: url(../../img/100yen.png);
-    height: 70px;
-    width: 70px;
-    margin-left: -7.5rem;
+    height: 3.25rem;
+    width: 3.25rem;
+    margin-left: -1.625rem;
 }
 .fifty {
     background-image: url(../../img/50yen.png);
-    height: 65px;
-    width: 65px;
-    margin-left: -7rem;
+    height: 3rem;
+    width: 3rem;
+    margin-left: -1.5rem;
 }
 .ten {
     background-image: url(../../img/10yen.png);
-    height: 60px;
-    width: 60px;
-    margin-left: -6.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-left: -1.25rem;
 }
 .five {
     background-image: url(../../img/5yen.png);
-    height: 55px;
-    width: 55px;
-    margin-left: -6rem;
+    height: 2.25rem;
+    width: 2.25rem;
+    margin-left: -1.25rem;
 }
 .one {
     background-image: url(../../img/1yen.png);
-    height: 50px;
-    width: 50px;
-    margin-left: -5.5rem;
+    height: 2rem;
+    width: 2rem;
+    margin-left: -1rem;
 }
 
 
