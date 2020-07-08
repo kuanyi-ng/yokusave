@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 // Import Components
-import { convertToCash , formatYen } from './convertToCash';
-import { StackedCash } from '../StackedCash';
+import { convertToCash } from './convertToCash';
 import { BudgetForm } from '../BudgetForm';
 import { PayForm } from '../PayForm';
-import { Card, Statistic, Row, Col, Tabs } from 'antd';
+import { RemainingCash } from '../RemainingCash';
+import { Row, Col, Tabs } from 'antd';
 // Import Types, Interfaces
-import { Cash, Budget, RemainingAmount, CashStack } from '../types';
+import { Cash, Budget, RemainingAmount } from '../types';
 // Import CSS
 import 'antd/dist/antd.css';
 import './AppContent.css';
-import { RemainingCash } from '../RemainingCash';
 
 const AppContent: React.FC = () => {
     const [budget, setBudget] = useState<Budget>({ monthlyBudget: 0, weeklyBudget: 0, dailyBudget: 0 });
@@ -53,61 +52,43 @@ const AppContent: React.FC = () => {
             <h1>欲セーブ</h1>
             <Row gutter={16} style={{ margin: 16 }}>
                 <Col span={24}>
-                    <Card>
-                        <Statistic title="残高" value={remainingAmount.monthlyRemaining} formatter={ val => formatYen(val as number) } />
-                    </Card>
+                    <Tabs 
+                    defaultActiveKey="daily" 
+                    centered={true} 
+                    size="large"
+                    tabPosition="bottom"
+                    animated={true}
+                    >
+                        <Tabs.TabPane tab="月" key="monthly">
+                            <RemainingCash
+                            statsTitle={"1ヶ月"}
+                            remaining={remainingAmount.monthlyRemaining}
+                            original={budget.monthlyBudget}
+                            tabName={"month"}
+                            cashStack={cash.monthlyCash}
+                            />
+                        </Tabs.TabPane>
+                        <Tabs.TabPane tab="日" key="daily">
+                            <RemainingCash
+                            remaining={remainingAmount.dailyRemaining}
+                            original={budget.dailyBudget}
+                            statsTitle={"1日"} 
+                            tabName={"day"}
+                            cashStack={cash.dailyCash}
+                            />
+                        </Tabs.TabPane>
+                        <Tabs.TabPane tab="週" key="weekly">
+                            <RemainingCash
+                            remaining={remainingAmount.weeklyRemaining}
+                            original={budget.weeklyBudget}
+                            statsTitle={"1週間"} 
+                            tabName={"week"}
+                            cashStack={cash.weeklyCash}
+                            />
+                        </Tabs.TabPane>
+                    </Tabs>
                 </Col>
             </Row>
-            <Tabs defaultActiveKey="daily" centered tabPosition="bottom">
-                <Tabs.TabPane tab="月" key="monthly">
-                   {cash.monthlyCash.length > 0 &&
-                    cash.monthlyCash.map((cashType) => {
-                        return (
-                            <Row justify="center">
-                                <Col span={24}>
-                                    <StackedCash 
-                                    desc={cashType.desc}
-                                    value={cashType.value}
-                                    piece={cashType.piece}/>
-                                </Col>
-                            </Row>
-                        );
-                    })
-                } 
-                </Tabs.TabPane>
-                <Tabs.TabPane tab="日" key="daily">
-                   {cash.dailyCash.length > 0 &&
-                    cash.dailyCash.map((cashType) => {
-                        return (
-                            <Row justify="center">
-                                <Col span={24}>
-                                    <StackedCash 
-                                    desc={cashType.desc}
-                                    value={cashType.value}
-                                    piece={cashType.piece}/>
-                                </Col>
-                            </Row>
-                        );
-                    })
-                } 
-                </Tabs.TabPane>
-                <Tabs.TabPane tab="週" key="weekly">
-                   {cash.weeklyCash.length > 0 &&
-                    cash.weeklyCash.map((cashType) => {
-                        return (
-                            <Row justify="center">
-                                <Col span={24}>
-                                    <StackedCash 
-                                    desc={cashType.desc}
-                                    value={cashType.value}
-                                    piece={cashType.piece}/>
-                                </Col>
-                            </Row>
-                        );
-                    })
-                } 
-                </Tabs.TabPane>
-            </Tabs>
             <div className="menu-bar">
                 <BudgetForm 
                 handleFinish={ updateBudget }

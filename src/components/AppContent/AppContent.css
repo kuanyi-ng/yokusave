@@ -1,3 +1,7 @@
+.ant-tabs-tab {
+    margin: 0 2rem;
+}
+
 .menu-bar {
     position: fixed;
     bottom: 0px;
