@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Row, Col, Button, Modal, Form, InputNumber } from 'antd';
 // Import CSS
 import 'antd/dist/antd.css';
+import './PayForm.css';
 
 interface PayFormProps {
     handleFinish: (payAmount: number) => void

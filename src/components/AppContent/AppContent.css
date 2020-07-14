@@ -1,12 +1,16 @@
 .app-title {
     margin: 0;
     padding: 0.5rem;
-    background-color: #1de9b6;
+    background-color: #6EC9EF;
     color: #fafafa;
 }
 
 .ant-tabs-tab {
     margin: 0 2rem;
+}
+
+.ant-tabs-tab:hover {
+    color: #6EC9EF;
 }
 
 .menu-bar {
