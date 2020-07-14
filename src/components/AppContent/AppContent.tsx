@@ -68,15 +68,6 @@ const AppContent: React.FC = () => {
                             cashStack={cash.monthlyCash}
                             />
                         </Tabs.TabPane>
-                        <Tabs.TabPane tab="日" key="daily">
-                            <RemainingCash
-                            remaining={remainingAmount.dailyRemaining}
-                            original={budget.dailyBudget}
-                            statsTitle={"1日"} 
-                            tabName={"day"}
-                            cashStack={cash.dailyCash}
-                            />
-                        </Tabs.TabPane>
                         <Tabs.TabPane tab="週" key="weekly">
                             <RemainingCash
                             remaining={remainingAmount.weeklyRemaining}
@@ -84,6 +75,15 @@ const AppContent: React.FC = () => {
                             statsTitle={"1週間"} 
                             tabName={"week"}
                             cashStack={cash.weeklyCash}
+                            />
+                        </Tabs.TabPane>
+                        <Tabs.TabPane tab="日" key="daily">
+                            <RemainingCash
+                            remaining={remainingAmount.dailyRemaining}
+                            original={budget.dailyBudget}
+                            statsTitle={"1日"} 
+                            tabName={"day"}
+                            cashStack={cash.dailyCash}
                             />
                         </Tabs.TabPane>
                     </Tabs>
