@@ -15,9 +15,19 @@ interface RemainingCashProps {
 }
 
 const RemainingCash: React.FC<RemainingCashProps> = ({ statsTitle, remaining, original, tabName, cashStack }) => {
+    let valueColor = {};
+
+    if (remaining < 0) {
+        valueColor = { color: '#ff4d4f' };
+    }
+
     return (
         <>
-        <Statistic title={`${statsTitle}の残高`} value={remaining} prefix="¥ " suffix={`/ ${original}`} />
+        <Statistic 
+        title={`${statsTitle}の残高`} 
+        value={remaining}
+        valueStyle={valueColor}
+        prefix="¥ " suffix={`/ ${original}`} />
         <StackedCash stack={cashStack} />
         </>
     );
