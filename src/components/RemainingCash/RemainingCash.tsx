@@ -18,6 +18,7 @@ const RemainingCash: React.FC<RemainingCashProps> = ({ statsTitle, remaining, or
     let valueColor = {};
 
     if (remaining < 0) {
+        // show value in red (warning)
         valueColor = { color: '#ff4d4f' };
     }
 

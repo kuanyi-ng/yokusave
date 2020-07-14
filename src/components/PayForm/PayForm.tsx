@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Row, Col, Button, Modal, Form, InputNumber } from 'antd';
+// Import Types
+import { NumberValidation } from '../types';
+// Import Helper Functions
+import { validateNumber } from '../helper';
 // Import CSS
 import 'antd/dist/antd.css';
 import './PayForm.css';
@@ -10,12 +14,25 @@ interface PayFormProps {
 
 const PayForm: React.FC<PayFormProps> = ({ handleFinish }) => {
     const [showPay, setShowPay] = useState<boolean>(false);
+
+    const defaultValidation = {
+        validateStatus: undefined, 
+        errorMsg: undefined
+    }
+
+    const [payAmountValidation, setPayAmountValidation] = useState<NumberValidation>(defaultValidation);
     
     const payAmountInputProps = {
         style: {
             width: 300
         }
     };
+
+    const onNumberChange = (value: number | string | undefined) => {
+        if (value !== undefined) {
+            setPayAmountValidation(validateNumber(value));
+        }
+    }
 
     return (
         <>
@@ -44,7 +61,6 @@ const PayForm: React.FC<PayFormProps> = ({ handleFinish }) => {
                 name="pay"
                 size="large"
                 hideRequiredMark={true}
-                initialValues={{ payAmount: 0 }}
                 onFinish={(value) => {
                     handleFinish(value.payAmount);
                     setShowPay(false);
@@ -58,8 +74,10 @@ const PayForm: React.FC<PayFormProps> = ({ handleFinish }) => {
                     label="支払金額"
                     name="payAmount"
                     rules={[{ required: true, message: '支払う金額を入力してください' }]}
+                    validateStatus={payAmountValidation.validateStatus}
+                    help={payAmountValidation.errorMsg}
                 >
-                    <InputNumber formatter={value => `¥ ${value}`} {...payAmountInputProps} />
+                    <InputNumber formatter={value => `¥ ${value}`} {...payAmountInputProps} onChange={onNumberChange}/>
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

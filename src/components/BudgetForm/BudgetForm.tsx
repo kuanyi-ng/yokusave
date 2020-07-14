@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Row, Col, Button, Modal, Form, InputNumber } from 'antd';
 // Import Types
-import { Budget } from '../types';
+import { Budget, NumberValidation } from '../types';
+// Import Helper Functions
+import { validateNumber } from '../helper';
 // Import CSS
 import 'antd/dist/antd.css';
 import './BudgetForm.css';
@@ -12,12 +14,51 @@ interface BudgetFormProps {
 
 const BudgetForm: React.FC<BudgetFormProps> = ({ handleFinish }) => {
     const [showSettings, setShowSettings] = useState<boolean>(false);
+    const [formMsg, setFormMsg] = useState<string>("");
+
+    const defaultValidation = {
+        validateStatus: undefined, 
+        errorMsg: undefined
+    }
+
+    const [monthValidation, setMonthValidation] = useState<NumberValidation>(defaultValidation);
+    const [weekValidation, setWeekValidation] = useState<NumberValidation>(defaultValidation); 
+    const [dayValidation, setDayValidation] = useState<NumberValidation>(defaultValidation);
 
     const budgetInputProps = {
         style: {
             width: 300
         }
     };
+
+    const onMonthNumberChange = (value: number | string | undefined) => {
+        if (value !== undefined) {
+            setMonthValidation(validateNumber(value));
+        }
+    }
+    const onWeekNumberChange = (value: number | string | undefined) => {
+        if (value !== undefined) {
+            setWeekValidation(validateNumber(value));
+        }
+    }
+    const onDayNumberChange = (value: number | string | undefined) => {
+        if (value !== undefined) {
+            setDayValidation(validateNumber(value));
+        }
+    }
+
+    const onFormSubmit = (budget: Budget) => {
+        // check if budget is practical
+        let checkMonth = budget.monthlyBudget >= budget.weeklyBudget;
+        let checkDaily = budget.weeklyBudget >= budget.dailyBudget;
+        if (checkMonth && checkDaily) {
+            setFormMsg("");
+            handleFinish(budget);
+            setShowSettings(false);
+        } else {
+            setFormMsg("短期間の予算が長期間の予算より多い。");
+        }
+    }
 
     return (
         <>
@@ -46,11 +87,9 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ handleFinish }) => {
                 name="budget"
                 size="large"
                 hideRequiredMark={true}
-                initialValues={{ monthlyBudget: 0, weeklyBudget: 0, dailyBudget: 0 }}
                 onFinish={(budget) => {
-                    handleFinish(budget as Budget);
-                    setShowSettings(false);
-                }}
+                    onFormSubmit(budget as Budget)}
+                }
                 onFinishFailed={(val) => {
                     console.log("Cancelled", val);
                     setShowSettings(false);
@@ -60,25 +99,35 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ handleFinish }) => {
                     label="1ヶ月"
                     name="monthlyBudget"
                     rules={[{ required: true, message: '今月の予算を入力してください' }]}
+                    validateStatus={monthValidation.validateStatus}
+                    help={monthValidation.errorMsg}
                 >
-                    <InputNumber formatter={value => `¥ ${value} /月`} {...budgetInputProps}/>
+                    <InputNumber formatter={value => `¥ ${value} /月`} {...budgetInputProps} onChange={onMonthNumberChange}/>
                 </Form.Item>
 
                 <Form.Item
                     label="1週間"
                     name="weeklyBudget"
                     rules={[{ required: false }]}
+                    validateStatus={weekValidation.validateStatus}
+                    help={weekValidation.errorMsg}
                 >
-                    <InputNumber formatter={value => `¥ ${value} /週`} {...budgetInputProps} /> 
+                    <InputNumber formatter={value => `¥ ${value} /週`} {...budgetInputProps} onChange={onWeekNumberChange}/> 
                 </Form.Item>
 
                 <Form.Item
                     label="1日"
                     name="dailyBudget"
                     rules={[{ required: false }]}
+                    validateStatus={dayValidation.validateStatus}
+                    help={dayValidation.errorMsg}
                 >
-                    <InputNumber formatter={value => `¥ ${value} /日`} {...budgetInputProps}/>
+                    <InputNumber formatter={value => `¥ ${value} /日`} {...budgetInputProps} onChange={onDayNumberChange}/>
                 </Form.Item>
+
+                {formMsg !== "" &&
+                    <p style={{ textAlign: "center", color: "#ff4d4f" }}>{formMsg}</p>
+                }
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                     <Button type="primary" htmlType="submit">

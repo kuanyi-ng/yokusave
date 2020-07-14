@@ -23,3 +23,8 @@ export interface RemainingAmount {
     weeklyRemaining: number;
     dailyRemaining: number;
 }
+
+export interface NumberValidation {
+    validateStatus: "" | "error" | "success" | "warning" | "validating" | undefined;
+    errorMsg: string | undefined;
+}
