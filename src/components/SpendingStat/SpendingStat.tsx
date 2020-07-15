@@ -17,18 +17,18 @@ const SpendingStat: React.FC<SpendingStatProps> = ({ budget, remaining }) => {
     
     return (
     <>
-    <Row justify="center" style={{ margin: 16 }}>
+    <Row justify="center" style={{ margin: 8 }}>
         <Col span={24}>
             <Button
             type="default"
-            style={{ width: 150 }}
+            style={{ width: 100 }}
             onClick={() => setShowStat(true)}>
-                消費データ
+                グラフ
             </Button>
         </Col>
     </Row>
     <Modal
-    title="消費データ"
+    title="グラフ"
     centered={true}
     visible={showStat}
     footer={null}

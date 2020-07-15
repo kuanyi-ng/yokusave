@@ -96,7 +96,8 @@ const AppContent: React.FC = () => {
                 handleFinish={ updateBudget }
                 />
                 <PayForm 
-                handleFinish={ updateRemainingAmount }/>
+                handleFinish={ updateRemainingAmount }
+                />
                 <SpendingStat 
                 budget={budget}
                 remaining={remainingAmount}

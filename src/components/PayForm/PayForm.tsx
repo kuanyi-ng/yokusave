@@ -36,13 +36,14 @@ const PayForm: React.FC<PayFormProps> = ({ handleFinish }) => {
 
     return (
         <>
-        <Row justify="center" style={{ margin: 16 }}>
+        <Row justify="center" style={{ margin: 8 }}>
             <Col span={24}>
                 <Button 
                 type="default"
-                style={{ width: 150 }}
+                style={{ width: 100 }}
                 onClick={() => setShowPay(true)}>
-                    支払い(デモ用)
+                    {/* 支払い(デモ用) */}
+                    支払い 
                 </Button>
             </Col>
         </Row>

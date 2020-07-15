@@ -62,11 +62,11 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ handleFinish }) => {
 
     return (
         <>
-        <Row justify="center" style={{ margin: 16 }}>
+        <Row justify="center" style={{ margin: 8 }}>
             <Col span={24}>
                 <Button 
                 type="default"
-                style={{ width: 150 }}
+                style={{ width: 100 }}
                 onClick={() => setShowSettings(true)}>
                     予算設定
                 </Button>
