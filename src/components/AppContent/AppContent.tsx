@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { convertToCash } from './convertToCash';
 import { BudgetForm } from '../BudgetForm';
 import { PayForm } from '../PayForm';
+import { SpendingStat } from '../SpendingStat';
 import { RemainingCash } from '../RemainingCash';
 import { Row, Col, Tabs } from 'antd';
 // Import Types, Interfaces
@@ -10,6 +11,7 @@ import { Cash, Budget, RemainingAmount } from '../types';
 // Import CSS
 import 'antd/dist/antd.css';
 import './AppContent.css';
+
 
 const AppContent: React.FC = () => {
     const [budget, setBudget] = useState<Budget>({ monthlyBudget: 0, weeklyBudget: 0, dailyBudget: 0 });
@@ -95,6 +97,10 @@ const AppContent: React.FC = () => {
                 />
                 <PayForm 
                 handleFinish={ updateRemainingAmount }/>
+                <SpendingStat 
+                budget={budget}
+                remaining={remainingAmount}
+                />
             </Row>
         </>
     );
