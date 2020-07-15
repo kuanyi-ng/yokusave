@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col, Modal, Button } from 'antd';
 import { SpendBudgetBar } from '../SpendBudgetBar';
+import { SpendBudgetDist } from '../SpendBudgetDist';
 // Import Types
 import { Budget, RemainingAmount } from '../types';
 // Import CSS
@@ -38,6 +39,14 @@ const SpendingStat: React.FC<SpendingStatProps> = ({ budget, remaining }) => {
             budget={budget}
             remaining={remaining}
             chartTitle="支出と予算"
+            />
+        </Row>
+        <Row justify="center">
+            <SpendBudgetDist 
+            budget={budget}
+            remaining={remaining}
+            chartTitle="類似したユーザーとの比較"
+            chartSubtitle="支出 / 予算 %"
             />
         </Row>
 

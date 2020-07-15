@@ -108,7 +108,7 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ handleFinish }) => {
                 <Form.Item
                     label="1週間"
                     name="weeklyBudget"
-                    rules={[{ required: false }]}
+                    rules={[{ required: true, message: '今週の予算を入力してください' }]}
                     validateStatus={weekValidation.validateStatus}
                     help={weekValidation.errorMsg}
                 >
@@ -118,7 +118,7 @@ const BudgetForm: React.FC<BudgetFormProps> = ({ handleFinish }) => {
                 <Form.Item
                     label="1日"
                     name="dailyBudget"
-                    rules={[{ required: false }]}
+                    rules={[{ required: true, message: '今日の予算を入力してください' }]}
                     validateStatus={dayValidation.validateStatus}
                     help={dayValidation.errorMsg}
                 >

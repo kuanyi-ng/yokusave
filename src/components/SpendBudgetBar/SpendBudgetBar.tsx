@@ -31,7 +31,7 @@ const SpendBudgetBar: React.FC<SpendBudgetBarProps> = ({ chartTitle, budget, rem
     let chartOptions = {
         chart: {
             type: 'bar',
-            height: 350,
+            height: 200,
             stacked: true,
             stackType: '100%',
             toolbar: {
@@ -73,6 +73,7 @@ const SpendBudgetBar: React.FC<SpendBudgetBarProps> = ({ chartTitle, budget, rem
     options={chartOptions}
     series={dataSeries}
     type='bar'
+    height={200}
     />
     </>
     );

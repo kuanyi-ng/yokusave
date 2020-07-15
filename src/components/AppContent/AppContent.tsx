@@ -58,7 +58,7 @@ const AppContent: React.FC = () => {
                     defaultActiveKey="daily" 
                     centered={true} 
                     size="large"
-                    tabPosition="bottom"
+                    tabPosition="top"
                     animated={true}
                     >
                         <Tabs.TabPane tab="月" key="monthly">
