@@ -12,9 +12,13 @@ interface SpendBudgetDistProps {
 
 const SpendBudgetDist: React.FC<SpendBudgetDistProps> = ({ chartTitle, chartSubtitle, budget, remaining }) => {
     
-    let monthlyRatio = remaining.monthlyRemaining / budget.monthlyBudget * 100;
-    let weeklyRatio = remaining.weeklyRemaining / budget.weeklyBudget * 100;
-    let dailyRatio = remaining.dailyRemaining / budget.dailyBudget * 100;
+    const spendBudgetRatio = (remaining: number, planned: number) => {
+        return (planned - remaining) / planned * 100;
+    }
+
+    let monthlyRatio = spendBudgetRatio(remaining.monthlyRemaining, budget.monthlyBudget);
+    let weeklyRatio = spendBudgetRatio(remaining.weeklyRemaining, budget.weeklyBudget);
+    let dailyRatio = spendBudgetRatio(remaining.dailyRemaining, budget.dailyBudget);
 
     let xaxisCategory = [];
     for (let i=0; i<=100; i++) {
